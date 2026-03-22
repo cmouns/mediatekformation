@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Contrôleur gérant le CRUD des playlists pour l'administration
+ * @author Mounir SEBTI
+ */
 #[Route('/admin/playlists', name: 'admin_playlists')]
 class AdminPlaylistsController extends AbstractController
 {
@@ -22,6 +26,10 @@ class AdminPlaylistsController extends AbstractController
         $this->categorieRepository = $categorieRepository;
     }
 
+    /**
+     * Liste les playlists avec les options de gestion
+     * @return Response
+     */
     #[Route('/', name: '')]
     public function index(): Response
     {
@@ -71,6 +79,11 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }  
 
+    /**
+     * Ajoute une nouvelle playlist
+     * @param Playlist $playlist
+     * @return Response
+     */
     #[Route('/ajout', name: '.ajout')]
     public function ajout(Request $request): Response
     {
@@ -89,6 +102,12 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
 
+    /**
+     * Modifie une playlist existante
+     * @param Playlist $playlist
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/edit/{id}', name: '.edit')]
     public function edit(Playlist $playlist, Request $request): Response
     {
@@ -107,6 +126,11 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprime une playlist si elle ne contient aucune formation
+     * @param Playlist $playlist
+     * @return Response
+     */
     #[Route('/suppr/{id}', name: '.suppr')]
     public function suppr(Playlist $playlist): Response
     {

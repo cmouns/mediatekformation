@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Repository gérant les requêtes de l'entité Formation
+ * @author Mounir SEBTI
  * @extends ServiceEntityRepository<Formation>
  */
 class FormationRepository extends ServiceEntityRepository
@@ -30,8 +32,8 @@ class FormationRepository extends ServiceEntityRepository
 
     /**
      * Retourne toutes les formations triées sur un champ
-     * @param type $champ
-     * @param type $ordre
+     * @param string $champ
+     * @param string $ordre
      * @param type $table si $champ dans une autre table
      * @return Formation[]
      */
@@ -82,7 +84,7 @@ class FormationRepository extends ServiceEntityRepository
     
     /**
      * Retourne les n formations les plus récentes
-     * @param type $nb
+     * @param string $nb
      * @return Formation[]
      */
     public function findAllLasted($nb) : array {

@@ -7,7 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Entité Formation : Représente une vidéo de formation
+ * @author Mounir SEBTI
+ */
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
 {
@@ -20,9 +25,13 @@ class Formation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    /**
+     * @var int|null Identifiant unique en base
+     */
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\LessThanOrEqual('today', message: "La date ne peut pas être postérieure à aujourd'hui")]
     private ?\DateTimeInterface $publishedAt = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -65,6 +74,9 @@ class Formation
         return $this;
     }
 
+    /**
+     * @return string Date formatée pour l'affichage (jj/mm/aaaa)
+     */
     public function getPublishedAtString(): string {
         if($this->publishedAt == null){
             return "";

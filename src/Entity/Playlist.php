@@ -9,6 +9,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlaylistRepository::class)]
+/**
+ * Entité Playlist : Regroupe plusieurs formations
+ * @author Mounir SEBTI
+ */
 class Playlist
 {
     #[ORM\Id]
@@ -93,6 +97,7 @@ class Playlist
     }
     
     /**
+     * Récupère la liste unique des noms de catégories présentes dans la playlist
      * @return Collection<int, string>
      */
     public function getCategoriesPlaylist() : Collection

@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Contrôleur gérant les catégories (Ajout et Suppression)
+ * @author Mounir SEBTI
+ */
 #[Route('/admin/categories', name: 'admin_categories')]
 class AdminCategoriesController extends AbstractController
 {
@@ -19,6 +23,11 @@ class AdminCategoriesController extends AbstractController
         $this->categorieRepository = $categorieRepository;
     }
 
+    /**
+     * Affiche les catégories et gère le formulaire d'ajout direct
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: '')]
     public function index(Request $request): Response
     {
@@ -47,6 +56,11 @@ class AdminCategoriesController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprime une catégorie si elle n'est rattachée à aucune formation
+     * @param Categorie $categorie
+     * @return Response
+     */
     #[Route('/suppr/{id}', name: '.suppr')]
     public function suppr(Categorie $categorie): Response
     {

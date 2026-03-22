@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Contrôleur gérant le CRUD des formations pour l'administration
+ * @author Mounir SEBTI
+ */
 #[Route('/admin', name: 'admin_')]
 class AdminFormationsController extends AbstractController
 {
@@ -22,6 +26,10 @@ class AdminFormationsController extends AbstractController
         $this->categorieRepository = $categorieRepository;
     }
 
+    /**
+     * Affiche la liste des formations en mode édition
+     * @return Response
+     */
     #[Route('/formations', name: 'formations')]
     public function index(): Response
     {
@@ -34,6 +42,7 @@ class AdminFormationsController extends AbstractController
         ]);
     }
 
+    
     #[Route('/formations/tri/{champ}/{ordre}/{table}', name: 'formations.sort')]
     public function sort(string $champ, string $ordre, string $table=""): Response
     {
@@ -61,6 +70,11 @@ class AdminFormationsController extends AbstractController
         ]);
     }
 
+    /**
+     * Ajoute une nouvelle formation via le formulaire dédié
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/formations/ajout', name: 'formation.ajout')]
     public function ajout(Request $request): Response
     {
@@ -79,6 +93,12 @@ class AdminFormationsController extends AbstractController
         ]);
     }
 
+    /**
+     * Modifie une formation existante
+     * @param Formation $formation
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/formations/edit/{id}', name: 'formation.edit')]
     public function edit(Formation $formation, Request $request): Response
     {
@@ -96,6 +116,11 @@ class AdminFormationsController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprime une formation de la base de données
+     * @param Formation $formation
+     * @return Response
+     */
     #[Route('/formations/suppr/{id}', name: 'formation.suppr')]
     public function suppr(Formation $formation): Response
     {
