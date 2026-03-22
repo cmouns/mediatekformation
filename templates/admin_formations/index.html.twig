@@ -1,0 +1,46 @@
+{% extends "basefront.html.twig" %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h3 class="text-info">Back-Office : Gestion des Formations</h3>
+            
+            <div class="text-right mb-3">
+                <a href="{{ path('admin_formation.ajout') }}" class="btn btn-primary">Ajouter une formation</a>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-left align-top" scope="col">Formation</th>
+                        <th class="text-left align-top" scope="col">Playlist</th>
+                        <th class="text-left align-top" scope="col">Date de parution</th>
+                        <th class="text-center align-top" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if formations|length > 0 %}
+                        {% for formation in formations %}
+                            <tr class="align-middle">
+                                <td>
+                                    <h5 class="text-info">{{ formation.title }}</h5>
+                                </td>
+                                <td class="text-left">
+                                    {{ formation.playlist.name|default('Aucune') }}
+                                </td>
+                                <td class="text-left">
+                                    {{ formation.publishedAt|date("d/m/Y") }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ path('admin_formation.edit', {id:formation.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                                    
+                                    <a href="{{ path('admin_formation.suppr', {id:formation.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer la formation : {{ formation.title|escape('js') }} ?')">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
