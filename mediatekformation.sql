@@ -673,7 +673,8 @@ CREATE TABLE IF NOT EXISTS `playlist` (
 --
 
 INSERT INTO `playlist` (`id`, `name`, `description`) VALUES
-(1, 'Eclipse et Java', 'Utilisation de l\'IDE Eclipse et développement en Java.'),
+(1, '
+', 'Utilisation de l\'IDE Eclipse et développement en Java.'),
 (2, 'Visual Studio 2019 et C#', 'Plusieurs vidéos portant sur différents aspects de Visual Studio :\r\nProgrammation en C# (événementiel, objet, diverses astuces) et configuration (lien avec Github...).'),
 (3, 'Programmation sous Python', 'Exercices progressifs pour apprendre à programmer sous Python.'),
 (4, 'Sujet E5 SLAM 2019 métropole : cas RESTILOC', 'Correction commentée des 4 missions (1 vidéo par mission)'),
