@@ -1,0 +1,56 @@
+{% extends "basefront.html.twig" %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h3 class="text-info">Back-Office : Gestion des Playlists</h3>
+            
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger mt-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="text-right mb-3">
+                <a href="{{ path('admin_playlists.ajout') }}" class="btn btn-primary">Ajouter une playlist</a>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-left align-top" scope="col">Playlist</th>
+                        <th class="text-left align-top" scope="col">Catégories</th>
+                        <th class="text-center align-top" scope="col">Nombre de formations</th>
+                        <th class="text-center align-top" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if playlists|length > 0 %}
+                        {% for playlist in playlists %}
+                            <tr class="align-middle">
+                                <td>
+                                    <h5 class="text-info">{{ playlist.name }}</h5>
+                                </td>
+                                <td class="text-left">
+                                    {% set categories = playlist.categoriesplaylist %}
+                                    {% if categories|length > 0  %}
+                                        {% for c in categories %}
+                                            <span class="badge bg-secondary">{{ c }}</span>&nbsp;
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {{ playlist.formations|length }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ path('admin_playlists.edit', {id:playlist.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                                    <a href="{{ path('admin_playlists.suppr', {id:playlist.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer la playlist : {{ playlist.name|escape('js') }} ?')">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
