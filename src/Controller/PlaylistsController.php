@@ -17,29 +17,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaylistsController extends AbstractController {
     
     /**
-     * 
-     * @var PlaylistRepository
+     * * @var PlaylistRepository
      */
     private $playlistRepository;
     
     /**
-     * 
-     * @var FormationRepository
+     * * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     * 
-     * @var CategorieRepository
+     * * @var CategorieRepository
      */
     private $categorieRepository;    
     
     function __construct(PlaylistRepository $playlistRepository, 
             CategorieRepository $categorieRepository,
-            FormationRepository $formationRespository) {
+            FormationRepository $formationRepository) {
         $this->playlistRepository = $playlistRepository;
         $this->categorieRepository = $categorieRepository;
-        $this->formationRepository = $formationRespository;
+        $this->formationRepository = $formationRepository;
     }
     
     /**
@@ -61,6 +58,9 @@ class PlaylistsController extends AbstractController {
         switch($champ){
             case "name":
                 $playlists = $this->playlistRepository->findAllOrderByName($ordre);
+                break;
+            case "nbformations":
+                $playlists = $this->playlistRepository->findAllOrderByNbFormations($ordre);
                 break;
         }
         $categories = $this->categorieRepository->findAll();
