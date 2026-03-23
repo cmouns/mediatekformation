@@ -18,6 +18,7 @@ jobs:
         server: ftp-sebti.alwaysdata.net
         username: sebti
         password: ${{ secrets.FTP_PASSWORD }}
+        protocol: ftps
         server-dir: /www/
         exclude: |
           **/.git*
